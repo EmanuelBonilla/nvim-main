@@ -16,12 +16,13 @@ return {
         preset = "default",
         ["<C-Space>"] = { "show" },
         ["<C-e>"] = { "hide" },
-        ["<C-l>"] = { "accept" },
+        ["<CR>"] = { "accept_and_enter", "fallback_to_mappings" },
         ["<C-n>"] = { "select_next" },
         ["<C-p>"] = { "select_prev" },
+        ["<C-k>"] = { "show_documentation", "show_signature" },
       },
       sources = {
-        default = { "lsp", "path", "buffer" }, -- fuentes de sugerencias
+        default = { "lsp", "path", "buffer" },
       },
     })
   end,

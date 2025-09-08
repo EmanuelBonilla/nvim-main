@@ -21,9 +21,9 @@ return {
     vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Buscar archivos" })
     vim.keymap.set("n", "<leader><leader>", fzf.files, { desc = "Buscar archivos (atajo alterno)" })
     vim.keymap.set("n", "<leader>fg", fzf.live_grep, { desc = "Buscar en contenido" })
-    vim.keymap.set("n", "<leader>,", fzf.live_grep, { desc = "Buscar en contenido (atajo alterno)" })
+    vim.keymap.set("n", "<leader>.", fzf.live_grep, { desc = "Buscar en contenido (atajo alterno)" })
     vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Buscar buffers" })
-    vim.keymap.set("n", "<leader>.", fzf.buffers, { desc = "Buscar buffers (atajo alterno)" })
+    vim.keymap.set("n", "<leader>,", fzf.buffers, { desc = "Buscar buffers (atajo alterno)" })
     vim.keymap.set("n", "<leader>fh", fzf.help_tags, { desc = "Buscar ayuda" })
     vim.keymap.set("n", "<leader>fr", fzf.oldfiles, { desc = "Recent files" })
   end,

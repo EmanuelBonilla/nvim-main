@@ -20,7 +20,7 @@ return {
     local Terminal  = require('toggleterm.terminal').Terminal
     local float_term = Terminal:new({ direction = "float" })
 
-    vim.keymap.set("n", "<C-_>", function()
+    vim.keymap.set({ "n", "t" }, "<C-_>", function()
       float_term:toggle()
     end, { noremap = true, silent = true })
   end

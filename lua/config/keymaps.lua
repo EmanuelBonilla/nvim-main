@@ -12,5 +12,14 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Ir a la ventana arriba" })
 -- Buffers
 vim.keymap.set("n", "<leader>bd", ":bd<CR>", { desc = "Close Current Buffer" })
 
--- Terminal mode to normal mode
-vim.keymap.set("t", "<Esc><Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
+-- Terminal mode to normal mode, except for lazygit
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function(args)
+    local buf = args.buf
+    local chan = vim.b[buf].terminal_job_id
+    local cmd = vim.api.nvim_buf_get_name(buf)
+    if not cmd:match("lazygit") then
+      vim.keymap.set("t", "<Esc><Esc>", [[<C-\><C-n>]], { buffer = buf, noremap = true, silent = true })
+    end
+  end,
+})

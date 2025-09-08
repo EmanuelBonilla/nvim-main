@@ -13,7 +13,7 @@ return {
         border = "curved",
         width = 100,
         height = 30,
-        winblend = 3,
+        winblend = 0,
       },
     }
 

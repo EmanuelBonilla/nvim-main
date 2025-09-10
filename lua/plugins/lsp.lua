@@ -10,6 +10,8 @@ return {
     vim.keymap.set("n", "<leader>S", fzf.lsp_workspace_symbols, { desc = "Workspace symbols (fzf)" })
     vim.keymap.set("n", "<leader>d", ":FzfLua diagnostics_document <CR>", { desc = "Document diagnostics (fzf)" })
     vim.keymap.set("n", "<leader>D", ":FzfLua diagnostics_workspace <CR>", { desc = "Workspace diagnostics (fzf)" })
+    vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename all references of a class variable etc" })
+    vim.keymap.set("n", "<leader>R", vim.lsp.buf.rename, { desc = "Rename all references of a class variable etc" })
 
     local conform = require("conform")
     vim.keymap.set({ "n", "v" }, "<leader>f", function()

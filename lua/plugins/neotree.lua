@@ -9,13 +9,26 @@ return {
   config = function()
     require("neo-tree").setup({
       filesystem = {
-        follow_current_file = true, -- sigue el archivo activo
-        hijack_netrw_behavior = "open_default", -- reemplaza netrw
+        follow_current_file = true,
+        hijack_netrw_behavior = "open_default",
+        renderers = {
+          file = {
+            { "icon" },
+            { "name" },
+            { "last_modified", highlight = "Comment" },
+          },
+        },
+      },
+      default_component_configs = {
+        last_modified = {
+          enabled = true,
+          format = "%Y-%m-%d %H:%M",
+        },
       },
     })
-    -- Keymap para abrir/cerrar
+
     vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { desc = "Abrir NeoTree" })
   end,
   lazy = false,
-  priority = 1000
+  priority = 1000,
 }

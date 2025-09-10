@@ -25,7 +25,7 @@ return {
     vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Buscar buffers" })
     vim.keymap.set("n", "<leader>,", fzf.buffers, { desc = "Buscar buffers (atajo alterno)" })
     vim.keymap.set("n", "<leader>fh", fzf.help_tags, { desc = "Buscar ayuda" })
-    vim.keymap.set("n", "<leader>r", function()
+    vim.keymap.set("n", "<leader>o", function()
       fzf.oldfiles({ cwd_only = true })
     end, { desc = "Recent files" })
   end,

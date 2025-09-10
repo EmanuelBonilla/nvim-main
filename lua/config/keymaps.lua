@@ -23,3 +23,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
     end
   end,
 })
+
+-- Reselect visual block when ident
+vim.keymap.set("x", "<", "<gv", { desc = "Indent left and keep selection" })
+vim.keymap.set("x", ">", ">gv", { desc = "Indent right and keep selection" })

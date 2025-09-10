@@ -1,4 +1,5 @@
-vim.cmd.colorscheme("tokyonight")
+vim.cmd.colorscheme("retrobox")
+vim.cmd("TransparentDisable")
 vim.cmd [[
   highlight Comment gui=italic cterm=italic
   highlight Keyword gui=italic cterm=italic

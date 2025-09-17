@@ -8,11 +8,15 @@ return {
     lazy = false,
   },
   {
+    "morhetz/gruvbox",
+    lazy = false,
+  },
+  {
     "folke/tokyonight.nvim",
     lazy = false,
     config = function()
       local function next_colorscheme()
-        local select_colorschemes = { "tokyonight", "tokyonight-moon", "dark_plus", "VisualStudioDark", "retrobox" }
+        local select_colorschemes = { "tokyonight", "tokyonight-moon", "dark_plus", "gruvbox", "VisualStudioDark", "retrobox" }
         local current = vim.g.colors_name
 
         for i, cs in ipairs(select_colorschemes) do

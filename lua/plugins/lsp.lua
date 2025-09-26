@@ -12,6 +12,7 @@ return {
     vim.keymap.set("n", "<leader>D", ":FzfLua diagnostics_workspace <CR>", { desc = "Workspace diagnostics (fzf)" })
     vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename all references of a class variable etc" })
     vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename all references of a class variable etc" })
+    vim.keymap.set("n", "<leader>a", ":FzfLua lsp_code_actions <CR>", { desc = "Code actions" })
 
     local conform = require("conform")
     vim.keymap.set({ "n", "v" }, "<leader>f", function()

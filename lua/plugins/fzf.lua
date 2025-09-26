@@ -5,6 +5,8 @@ return {
   config = function()
     local fzf = require("fzf-lua")
 
+    fzf.register_ui_select()
+
     fzf.setup({
       winopts = {
         height = 0.85,

@@ -12,6 +12,8 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to up window" })
 
 -- Buffers
 vim.keymap.set("n", "<leader>bd", ":bd<CR>", { desc = "Close Current Buffer" })
+vim.keymap.set("n", "<leader>bD", ":bwipeout<CR>", { desc = "Close Current Buffer True" })
+vim.keymap.set("n", "<leader>bn", ":echo expand('%:p')<CR>", { desc = "Get name of buffer" })
 
 -- Terminal mode to normal mode, except for lazygit
 vim.api.nvim_create_autocmd("TermOpen", {

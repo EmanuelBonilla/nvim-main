@@ -35,7 +35,7 @@ return {
           row = 2,
         }
       })
-      vim.keymap.set("n", "<leader>a", function()
+      vim.keymap.set("n", "<leader>c", function()
         require("CopilotChat").toggle()
       end, { desc = "Abrir Copilot Chat" })
     end,

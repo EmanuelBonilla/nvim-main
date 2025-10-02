@@ -22,6 +22,7 @@ return {
             reportMissingParameterType = "warning",
             reportUnknownParameterType = "warning",
             reportUnknownMemberType = "warning",
+            reportUnknownLambdaType = "warning",
           },
         },
       },

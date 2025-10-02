@@ -1,4 +1,4 @@
-local env_file = ".env"
+local env_file = "~/.config/nvim/.env"
 
 -- Read .env
 for line in io.lines(env_file) do

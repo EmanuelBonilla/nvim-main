@@ -11,8 +11,8 @@ return {
       direction = "float",
       float_opts = {
         border = "curved",
-        width = 100,
-        height = 30,
+        width = math.floor(vim.o.columns * 0.9),
+        height = math.floor(vim.o.lines * 0.9),
         winblend = 0,
       },
     }

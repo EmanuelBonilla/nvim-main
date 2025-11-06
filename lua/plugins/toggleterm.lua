@@ -54,7 +54,7 @@ return {
 
     local function toggle_last_terminal()
       if #terminals > 0 then
-        terminals[#terminals]:toggle()
+        terminals[current_index]:toggle()
       else
         new_terminal()
       end

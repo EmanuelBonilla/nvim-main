@@ -75,6 +75,12 @@ return {
 
     for i = 1,9 do
       vim.keymap.set("n", "<leader>t" .. i, function()
+        if i > #terminals then
+          for _ = #terminals + 1, i do
+            new_terminal()
+            toggle_last_terminal()
+          end
+        end
         local difference = i - current_index
         if difference == 0 then
           toggle_last_terminal()

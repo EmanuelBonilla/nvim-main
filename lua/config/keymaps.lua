@@ -27,6 +27,59 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
--- Reselect visual block when ident
 vim.keymap.set("x", "<", "<gv", { desc = "Indent left and keep selection" })
 vim.keymap.set("x", ">", ">gv", { desc = "Indent right and keep selection" })
+
+vim.api.nvim_create_user_command('Mk', function(opts)
+  local cwd = vim.fn.getcwd()
+  local path = cwd .. '/' .. opts.args
+  if string.sub(opts.args, -1) == '/' then
+    vim.fn.system({'mkdir', '-p', path})
+    print('Created: ' .. path)
+  else
+    vim.fn.system({'mkdir', '-p', vim.fn.fnamemodify(path, ':h')})
+    vim.fn.system({'touch', path})
+    vim.cmd('edit ' .. vim.fn.fnameescape(path))
+    print('Created: ' .. path)
+  end
+end, { nargs = 1, complete = 'file' })
+
+vim.api.nvim_create_user_command('MkAbs', function(opts)
+  local path = opts.args
+  if string.sub(opts.args, -1) == '/' then
+    vim.fn.system({'mkdir', '-p', path})
+    print('Created: ' .. path)
+  else
+    vim.fn.system({'mkdir', '-p', vim.fn.fnamemodify(path, ':h')})
+    vim.fn.system({'touch', path})
+    vim.cmd('edit ' .. vim.fn.fnameescape(path))
+    print('Created: ' .. path)
+  end
+end, { nargs = 1 })
+
+vim.keymap.set("n", "<leader>T", function()
+  local buf_path = vim.api.nvim_buf_get_name(0)
+  local dir = vim.fn.fnamemodify(buf_path, ":p:h")
+  local pwd = vim.fn.getcwd()
+  local buf_and_path_and_pwd = buf_path .. "\n" .. dir .. "\n" .. pwd
+  vim.print(buf_and_path_and_pwd)
+end, { desc = "Test" })
+
+vim.keymap.set("n", "<leader>n", function()
+  local buf_path = vim.api.nvim_buf_get_name(0)
+  local dir = vim.fn.fnamemodify(buf_path, ":p:h")
+  vim.ui.input({ prompt = "Mk (relative to buffer): " }, function(input)
+    if input and #input > 0 then
+      local abs_path = dir .. "/" .. input
+      vim.cmd("MkAbs " .. vim.fn.fnameescape(abs_path))
+    end
+  end)
+end, { desc = "Mk relative to buffer" })
+
+vim.keymap.set("n", "<leader>N", function()
+  vim.ui.input({ prompt = "Mk (cwd): " }, function(input)
+    if input and #input > 0 then
+      vim.cmd("Mk " .. vim.fn.fnameescape(input))
+    end
+  end)
+end, { desc = "Mk relative to cwd" })

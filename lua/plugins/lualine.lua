@@ -31,19 +31,19 @@ return {
           }
         },
         lualine_x = {
-          {
-            function()
-              local msg = "No LSP"
-              local buf_ft = vim.bo.filetype
-              local clients = vim.lsp.get_active_clients()
-              for _, client in ipairs(clients) do
-                if client.config.filetypes and vim.tbl_contains(client.config.filetypes, buf_ft) then
-                  return " " .. client.name
-                end
-              end
-              return msg
-            end,
-          },
+          -- {
+          --   function()
+          --     local msg = "No LSP"
+          --     local buf_ft = vim.bo.filetype
+          --     local clients = vim.lsp.get_active_clients()
+          --     for _, client in ipairs(clients) do
+          --       if client.config.filetypes and vim.tbl_contains(client.config.filetypes, buf_ft) then
+          --         return " " .. client.name
+          --       end
+          --     end
+          --     return msg
+          --   end,
+          -- },
           {
             function()
               local ok, cord = pcall(require, "cord")
@@ -61,26 +61,26 @@ return {
           }
         },
         lualine_y = {
+        },
+        lualine_z = {
           {
             function()
               return os.date("%H:%M")
             end,
             icon = "",
           },
-        },
-        lualine_z = {
-          function()
-            return "󰃰 " .. os.date("%y:%m:%d")
-          end,
-          {
-            function()
-              local current = vim.fn.line(".")
-              local total = vim.fn.line("$")
-              local chars = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
-              local idx = math.ceil(current / total * #chars)
-              return chars[idx]
-            end,
-          }
+          -- function()
+          --   return "󰃰 " .. os.date("%y:%m:%d")
+          -- end,
+          -- {
+          --   function()
+          --     local current = vim.fn.line(".")
+          --     local total = vim.fn.line("$")
+          --     local chars = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
+          --     local idx = math.ceil(current / total * #chars)
+          --     return chars[idx]
+          --   end,
+          -- }
         },
       },
       tabline = {

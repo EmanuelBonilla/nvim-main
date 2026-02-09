@@ -10,28 +10,92 @@ return {
         globalstatus = true,
       },
       sections = {
-        lualine_a = { "mode" },
-        lualine_b = { {
+        lualine_a = { {
           function()
             return vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
           end,
           icon = "",
         } },
-        lualine_c = { { "filename", path = 1 }, },
+        lualine_b = {},
+        lualine_c = {
+          { "filename", path = 1 },
+          {
+            "diagnostics",
+            sources = { "nvim_diagnostic" },
+            symbols = {
+              error = " ",
+              warn  = " ",
+              info  = " ",
+              hint  = "󰌵 ",
+            },
+          }
+        },
         lualine_x = {
-          "branch",
-          "encoding",
-          "fileformat",
-          "filetype",
+          {
+            function()
+              local msg = "No LSP"
+              local buf_ft = vim.bo.filetype
+              local clients = vim.lsp.get_active_clients()
+              for _, client in ipairs(clients) do
+                if client.config.filetypes and vim.tbl_contains(client.config.filetypes, buf_ft) then
+                  return " " .. client.name
+                end
+              end
+              return msg
+            end,
+          },
+          {
+            function()
+              local ok, cord = pcall(require, "cord")
+              if not ok then
+                return "󰙯 OFF"
+              end
+
+              if cord.is_ready and cord.is_ready() then
+                return "󰙯 ON"
+              end
+
+              return "󰙯 IDLE"
+            end,
+            color = { fg = "#cba6f7" },
+          }
+        },
+        lualine_y = {
           {
             function()
               return os.date("%H:%M")
             end,
             icon = "",
           },
+        },
+        lualine_z = {
           function()
             return "󰃰 " .. os.date("%y:%m:%d")
           end,
+          {
+            function()
+              local current = vim.fn.line(".")
+              local total = vim.fn.line("$")
+              local chars = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
+              local idx = math.ceil(current / total * #chars)
+              return chars[idx]
+            end,
+          }
+        },
+      },
+      tabline = {
+        lualine_a = { { "mode", icon = "" } },
+        lualine_b = {
+          "branch",
+          {
+            "diff",
+            symbols = { added = " ", modified = " ", removed = " " },
+          },
+        },
+        lualine_x = {
+          "encoding",
+          "fileformat",
+          "filetype",
         },
         lualine_y = { "progress" },
         lualine_z = { "location" },

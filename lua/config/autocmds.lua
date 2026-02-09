@@ -10,6 +10,12 @@ end
 
 local colorscheme = vim.env.COLORSCHEME or "retrobox"
 local transparent = vim.env.TRANSPARENT or "true"
+Cord_status = "inactive"
+Navic_status = vim.env.NAVIC_STATUS or "inactive"
+
+if Navic_status ~= "inactive" then
+  Navic_status = "active"
+end
 
 vim.cmd.colorscheme(colorscheme)
 if transparent == "true" then

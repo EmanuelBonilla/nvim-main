@@ -28,7 +28,7 @@ return {
               info  = " ",
               hint  = "󰌵 ",
             },
-          }
+          },
         },
         lualine_x = {
           -- {
@@ -61,9 +61,10 @@ return {
               return "󰙯 IDLE"
             end,
             color = { fg = "#cba6f7" },
-          }
-        },
-        lualine_y = {
+          },
+          "encoding",
+          "fileformat",
+          "filetype",
         },
         lualine_z = {
           {
@@ -95,10 +96,17 @@ return {
             symbols = { added = " ", modified = " ", removed = " " },
           },
         },
+        lualine_c = {
+        },
         lualine_x = {
-          "encoding",
-          "fileformat",
-          "filetype",
+          {
+            function()
+              return require("nvim-navic").get_location()
+            end,
+            cond = function()
+              return Navic_status == "active" and require("nvim-navic").is_available()
+            end,
+          },
         },
         lualine_y = { "progress" },
         lualine_z = { "location" },

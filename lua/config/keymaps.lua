@@ -1,4 +1,3 @@
-Cord_status = "inactive"
 -- Leader, Save and Quit
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'i' }, '<C-s>', ':w<CR>', { desc = "Save File", noremap = true, silent = true })
@@ -85,3 +84,16 @@ vim.keymap.set("n", "<leader>N", function()
     end
   end)
 end, { desc = "Mk relative to cwd" })
+
+vim.keymap.set("n", "<leader>$", function()
+  local ok, _ = pcall(require, "nvim-navic")
+  if not ok then
+    print("Navic no está instalado")
+    return
+  end
+  if Navic_status == "inactive" then
+    Navic_status = "active"
+  else
+    Navic_status = "inactive"
+  end
+end, { desc = "Active Navic for lualine" })

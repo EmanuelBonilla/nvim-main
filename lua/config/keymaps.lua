@@ -1,3 +1,4 @@
+Cord_status = "inactive"
 -- Leader, Save and Quit
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'i' }, '<C-s>', ':w<CR>', { desc = "Save File", noremap = true, silent = true })
@@ -34,11 +35,11 @@ vim.api.nvim_create_user_command('Mk', function(opts)
   local cwd = vim.fn.getcwd()
   local path = cwd .. '/' .. opts.args
   if string.sub(opts.args, -1) == '/' then
-    vim.fn.system({'mkdir', '-p', path})
+    vim.fn.system({ 'mkdir', '-p', path })
     print('Created: ' .. path)
   else
-    vim.fn.system({'mkdir', '-p', vim.fn.fnamemodify(path, ':h')})
-    vim.fn.system({'touch', path})
+    vim.fn.system({ 'mkdir', '-p', vim.fn.fnamemodify(path, ':h') })
+    vim.fn.system({ 'touch', path })
     vim.cmd('edit ' .. vim.fn.fnameescape(path))
     print('Created: ' .. path)
   end
@@ -47,22 +48,23 @@ end, { nargs = 1, complete = 'file' })
 vim.api.nvim_create_user_command('MkAbs', function(opts)
   local path = opts.args
   if string.sub(opts.args, -1) == '/' then
-    vim.fn.system({'mkdir', '-p', path})
+    vim.fn.system({ 'mkdir', '-p', path })
     print('Created: ' .. path)
   else
-    vim.fn.system({'mkdir', '-p', vim.fn.fnamemodify(path, ':h')})
-    vim.fn.system({'touch', path})
+    vim.fn.system({ 'mkdir', '-p', vim.fn.fnamemodify(path, ':h') })
+    vim.fn.system({ 'touch', path })
     vim.cmd('edit ' .. vim.fn.fnameescape(path))
     print('Created: ' .. path)
   end
 end, { nargs = 1 })
 
 vim.keymap.set("n", "<leader>T", function()
-  local buf_path = vim.api.nvim_buf_get_name(0)
-  local dir = vim.fn.fnamemodify(buf_path, ":p:h")
-  local pwd = vim.fn.getcwd()
-  local buf_and_path_and_pwd = buf_path .. "\n" .. dir .. "\n" .. pwd
-  vim.print(buf_and_path_and_pwd)
+  local ok, cord = pcall(require, "cord")
+  if not ok then
+    print("Cord no está instalado")
+    return
+  end
+  vim.print(Cord_status)
 end, { desc = "Test" })
 
 vim.keymap.set("n", "<leader>n", function()

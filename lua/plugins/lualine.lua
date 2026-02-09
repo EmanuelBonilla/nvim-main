@@ -46,13 +46,16 @@ return {
           -- },
           {
             function()
-              local ok, cord = pcall(require, "cord")
-              if not ok then
+              if Cord_status == "inactive" then
                 return "󰙯 OFF"
               end
 
-              if cord.is_ready and cord.is_ready() then
+              if Cord_status == "active" then
                 return "󰙯 ON"
+              end
+
+              if Cord_status == "idle" then
+                return "󰙯 IDLE"
               end
 
               return "󰙯 IDLE"

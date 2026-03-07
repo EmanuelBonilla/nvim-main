@@ -66,10 +66,10 @@ vim.keymap.set("n", "<leader>T", function()
   vim.print(Cord_status)
 end, { desc = "Test" })
 
-vim.keymap.set("n", "<leader>n", function()
+vim.keymap.set("n", "<leader>fn", function()
   local buf_path = vim.api.nvim_buf_get_name(0)
   local dir = vim.fn.fnamemodify(buf_path, ":p:h")
-  vim.ui.input({ prompt = "Mk (relative to buffer): " }, function(input)
+  vim.ui.input({ prompt = "Mk (relative to buffer): " .. dir .. "/" }, function(input)
     if input and #input > 0 then
       local abs_path = dir .. "/" .. input
       vim.cmd("MkAbs " .. vim.fn.fnameescape(abs_path))
@@ -77,7 +77,7 @@ vim.keymap.set("n", "<leader>n", function()
   end)
 end, { desc = "Mk relative to buffer" })
 
-vim.keymap.set("n", "<leader>N", function()
+vim.keymap.set("n", "<leader>fN", function()
   vim.ui.input({ prompt = "Mk (cwd): " }, function(input)
     if input and #input > 0 then
       vim.cmd("Mk " .. vim.fn.fnameescape(input))
@@ -102,3 +102,43 @@ vim.keymap.set("n", "<leader>h", function()
   require("fzf-lua").git_bcommits()
 end, { desc = "Check git changes in current file" }
 )
+
+vim.api.nvim_create_user_command('DeleteFileBuffer', function()
+  local file = vim.api.nvim_buf_get_name(0)
+  if file == '' then
+    print('No file to delete.')
+    return
+  end
+  local confirm = vim.fn.input('Are you sure you want to delete ' .. file .. '? (y/N) ')
+  if confirm:lower() ~= 'y' then
+    print('\nAborted deletion.')
+    return
+  end
+  vim.fn.delete(file)
+  vim.cmd('bdelete!')
+  print('\nDeleted and closed: ' .. file)
+end, {})
+
+vim.api.nvim_create_user_command('DeleteFolderAndContentsBuffer', function()
+  local file = vim.api.nvim_buf_get_name(0)
+  if file == '' then
+    print('No file in buffer.')
+    return
+  end
+  local dir = vim.fn.fnamemodify(file, ':h')
+  if vim.fn.isdirectory(dir) == 0 then
+    print('Not a directory: ' .. dir)
+    return
+  end
+  local confirm = vim.fn.input('Delete the folder and ALL its contents: ' .. dir .. '? (y/N) ')
+  if confirm:lower() ~= 'y' then
+    print('\nAborted deletion.')
+    return
+  end
+  vim.fn.delete(dir, 'rf')
+  vim.cmd('bdelete!')
+  print('\nDeleted folder and contents: ' .. dir)
+end, {})
+
+vim.keymap.set("n", "<leader>fd", ":DeleteFileBuffer<CR>", { desc = "Delete current file" })
+vim.keymap.set("n", "<leader>fD", ":DeleteFolderAndContentsBuffer<CR>", { desc = "Delete folder and contents" })

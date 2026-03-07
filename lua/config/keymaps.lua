@@ -97,3 +97,8 @@ vim.keymap.set("n", "<leader>$", function()
     Navic_status = "inactive"
   end
 end, { desc = "Active Navic for lualine" })
+
+vim.keymap.set("n", "<leader>h", function()
+  require("fzf-lua").git_bcommits()
+end, { desc = "Check git changes in current file" }
+)

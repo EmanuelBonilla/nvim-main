@@ -15,7 +15,7 @@ return {
     vim.keymap.set("n", "<leader>a", ":FzfLua lsp_code_actions <CR>", { desc = "Code actions" })
 
     local conform = require("conform")
-    vim.keymap.set({ "n", "v" }, "<leader>f", function()
+    vim.keymap.set({ "n", "v" }, "<leader>ff", function()
       conform.format({ async = true, lsp_fallback = true })
     end, { desc = "Format buffer" })
     vim.keymap.set({ "n", "i", "v" }, "<C-f>", function()

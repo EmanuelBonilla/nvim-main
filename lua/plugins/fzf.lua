@@ -18,6 +18,12 @@ return {
       files = {
         cmd = "fd --type f --hidden --follow --exclude .git",
       },
+      keymap = {
+        builtin = {
+          ["<A-j>"] = "preview-page-down",
+          ["<A-k>"] = "preview-page-up",
+        }
+      },
     })
 
     vim.keymap.set("n", "<leader><leader>", fzf.files, { desc = "Buscar archivos (atajo alterno)" })

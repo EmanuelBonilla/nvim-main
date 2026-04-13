@@ -57,16 +57,8 @@ vim.api.nvim_create_user_command('MkAbs', function(opts)
   end
 end, { nargs = 1 })
 
-vim.keymap.set("n", "<leader>T", function()
-  local ok, cord = pcall(require, "cord")
-  if not ok then
-    print("Cord no está instalado")
-    return
-  end
-  vim.print(Cord_status)
-end, { desc = "Test" })
 
-vim.keymap.set("n", "<leader>fn", function()
+local function create_relative_file()
   local buf_path = vim.api.nvim_buf_get_name(0)
   local dir = vim.fn.fnamemodify(buf_path, ":p:h")
   vim.ui.input({ prompt = "Mk (relative to buffer): " .. dir .. "/" }, function(input)
@@ -75,7 +67,19 @@ vim.keymap.set("n", "<leader>fn", function()
       vim.cmd("MkAbs " .. vim.fn.fnameescape(abs_path))
     end
   end)
-end, { desc = "Mk relative to buffer" })
+end
+
+vim.keymap.set("n", "<leader>T", function()
+  local ok, _ = pcall(require, "cord")
+  if not ok then
+    print("Cord no está instalado")
+    return
+  end
+  vim.print(Cord_status)
+end, { desc = "Test" })
+
+vim.keymap.set("n", "<leader>fn", create_relative_file, { desc = "Mk relative to buffer" })
+vim.keymap.set("n", "<leader>n", create_relative_file, { desc = "Mk relative to buffer" })
 
 vim.keymap.set("n", "<leader>fN", function()
   vim.ui.input({ prompt = "Mk (cwd): " }, function(input)

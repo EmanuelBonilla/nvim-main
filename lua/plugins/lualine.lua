@@ -31,37 +31,25 @@ return {
           },
         },
         lualine_x = {
+          -- Discord Rich Presence status
           -- {
           --   function()
-          --     local msg = "No LSP"
-          --     local buf_ft = vim.bo.filetype
-          --     local clients = vim.lsp.get_active_clients()
-          --     for _, client in ipairs(clients) do
-          --       if client.config.filetypes and vim.tbl_contains(client.config.filetypes, buf_ft) then
-          --         return " " .. client.name
-          --       end
+          --     if Cord_status == "inactive" then
+          --       return "󰙯 OFF"
           --     end
-          --     return msg
+          --
+          --     if Cord_status == "active" then
+          --       return "󰙯 ON"
+          --     end
+          --
+          --     if Cord_status == "idle" then
+          --       return "󰙯 IDLE"
+          --     end
+          --
+          --     return "󰙯 IDLE"
           --   end,
+          --   color = { fg = "#cba6f7" },
           -- },
-          {
-            function()
-              if Cord_status == "inactive" then
-                return "󰙯 OFF"
-              end
-
-              if Cord_status == "active" then
-                return "󰙯 ON"
-              end
-
-              if Cord_status == "idle" then
-                return "󰙯 IDLE"
-              end
-
-              return "󰙯 IDLE"
-            end,
-            color = { fg = "#cba6f7" },
-          },
           "encoding",
           "fileformat",
           "filetype",

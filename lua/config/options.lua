@@ -9,3 +9,6 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.softtabstop = 2
+vim.o.winborder = "rounded"
+vim.o.winblend = 0
+vim.o.pumblend = 0

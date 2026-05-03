@@ -1,10 +1,14 @@
 -- require omnisharp-roslyn
-return {
-  require("lspconfig").omnisharp.setup({
-    cmd = { "OmniSharp" },
-    filetypes = { "cs", "vb" },
-    enable_roslyn_analyzers = true,
-    organize_imports_on_format = true,
-    enable_import_completion = true,
-  })
+vim.lsp.config["omnisharp"] = {
+  cmd = { "OmniSharp" },
+  filetypes = { "cs", "vb" },
+  root_markers = { "*.sln", "*.csproj", ".git" },
+  settings = {
+    omnisharp = {
+      enableRoslynAnalyzers = true,
+      organizeImportsOnFormat = true,
+      enableImportCompletion = true,
+    },
+  },
 }
+vim.lsp.enable("omnisharp")

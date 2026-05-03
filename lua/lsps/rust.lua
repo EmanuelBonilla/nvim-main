@@ -1,14 +1,12 @@
 -- require rust-analyzer
-return {
-  require("lspconfig").rust_analyzer.setup({
-    cmd = { "rust-analyzer" },
-    filetypes = { "rust" },
-    settings = {
-      ["rust-analyzer"] = {
-        cargo = {
-          allFeatures = true,
-        },
-      }
+vim.lsp.config["rust_analyzer"] = {
+  cmd = { "rust-analyzer" },
+  filetypes = { "rust" },
+  root_markers = { "Cargo.toml", ".git" },
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = { allFeatures = true },
     },
-  })
+  },
 }
+vim.lsp.enable("rust_analyzer")

@@ -12,3 +12,5 @@ vim.opt.softtabstop = 2
 vim.o.winborder = "rounded"
 vim.o.winblend = 0
 vim.o.pumblend = 0
+vim.opt.shortmess:append("c")
+vim.opt.cmdheight = 0

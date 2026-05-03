@@ -15,7 +15,7 @@ return {
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         local bufnr = args.buf
 
-        if client.server_capabilities.documentSymbolProvider then
+        if client:supports_method("textDocument/documentSymbol", { bufnr = bufnr }) then
           navic.attach(client, bufnr)
         end
       end,

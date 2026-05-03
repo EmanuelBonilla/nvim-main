@@ -10,12 +10,7 @@ return {
         globalstatus = true,
       },
       sections = {
-        lualine_a = { {
-          function()
-            return vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-          end,
-          icon = "",
-        } },
+        lualine_a = { { "mode", icon = "" } },
         lualine_b = {},
         lualine_c = {
           { "filename", path = 1 },
@@ -54,29 +49,18 @@ return {
           "fileformat",
           "filetype",
         },
+        lualine_y = { "progress" },
         lualine_z = {
-          {
-            function()
-              return os.date("%H:%M")
-            end,
-            icon = "",
-          },
-          -- function()
-          --   return "󰃰 " .. os.date("%y:%m:%d")
-          -- end,
-          -- {
-          --   function()
-          --     local current = vim.fn.line(".")
-          --     local total = vim.fn.line("$")
-          --     local chars = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
-          --     local idx = math.ceil(current / total * #chars)
-          --     return chars[idx]
-          --   end,
-          -- }
+          "location"
         },
       },
       tabline = {
-        lualine_a = { { "mode", icon = "" } },
+        lualine_a = { {
+          function()
+            return vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+          end,
+          icon = "",
+        } },
         lualine_b = {
           "branch",
           {
@@ -96,8 +80,13 @@ return {
             end,
           },
         },
-        lualine_y = { "progress" },
-        lualine_z = { "location" },
+        lualine_y = {},
+        lualine_z = { {
+          function()
+            return os.date("%H:%M")
+          end,
+          icon = "",
+        } },
       }
     })
   end

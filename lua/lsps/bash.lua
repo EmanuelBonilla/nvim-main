@@ -1,8 +1,6 @@
--- require bash-language-server
-return {
-  require("lspconfig").bashls.setup({
-    cmd = { "bash-language-server", "start" },
-    filetypes = { "sh", "bash" },
-    single_file_support = true,
-  })
+vim.lsp.config["bashls"] = {
+  cmd = { "bash-language-server", "start" },
+  filetypes = { "sh", "bash" },
+  root_markers = { ".git" },
 }
+vim.lsp.enable("bashls")

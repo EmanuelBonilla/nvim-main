@@ -5,6 +5,13 @@ return {
   config = function()
     local fzf = require("fzf-lua")
 
+    _G.fzf_preview_enabled = true
+
+    vim.api.nvim_create_user_command("FzfPreviewToggle", function()
+      _G.fzf_preview_enabled = not _G.fzf_preview_enabled
+      print("Preview: " .. tostring(_G.fzf_preview_enabled))
+    end, {})
+
     fzf.register_ui_select()
 
     local function prompt_choice(title, options, callback)
@@ -144,6 +151,7 @@ return {
         cmd = "fd --type f --hidden --follow --exclude .git --strip-cwd-prefix",
         prompt = "> ",
         header = false,
+        previewer = function() return _G.fzf_preview_enabled end,
         actions = {
           ["enter"] = function(selected, opts)
             if selected and #selected > 0 then

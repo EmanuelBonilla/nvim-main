@@ -182,8 +182,8 @@ return {
 
     vim.keymap.set("n", "<leader><leader>", fzf.files, { desc = "Buscar archivos (atajo alterno)" })
     vim.keymap.set("n", "<leader>.", fzf.live_grep, { desc = "Buscar en contenido (atajo alterno)" })
-    vim.keymap.set("n", "<leader>l", fzf.buffers, { desc = "Buscar buffers (atajo alterno)" })
-    vim.keymap.set("n", "<leader>,", function()
+    vim.keymap.set("n", "<leader>,", fzf.buffers, { desc = "Buscar buffers (atajo alterno)" })
+    vim.keymap.set("n", "<leader>l", function()
       fzf.files({ cwd = vim.fn.expand("%:p:h") })
     end, { desc = "Buscar archivos desde buffer actual" })
     vim.keymap.set("n", "<leader>fh", fzf.help_tags, { desc = "Buscar ayuda" })

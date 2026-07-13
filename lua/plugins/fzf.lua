@@ -16,7 +16,9 @@ return {
         border = "rounded",
       },
       files = {
-        cmd = "fd --type f --hidden --follow --exclude .git",
+        cmd = "fd --type f --hidden --follow --exclude .git --strip-cwd-prefix",
+        prompt = "> ",
+        header = false,
       },
       keymap = {
         builtin = {

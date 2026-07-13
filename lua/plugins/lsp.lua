@@ -9,6 +9,16 @@ return {
     vim.keymap.set("n", "<leader>s", fzf.lsp_document_symbols, { desc = "Document symbols (fzf)" })
     vim.keymap.set("n", "<leader>S", fzf.lsp_workspace_symbols, { desc = "Workspace symbols (fzf)" })
     vim.keymap.set("n", "<leader>d", ":FzfLua diagnostics_document <CR>", { desc = "Document diagnostics (fzf)" })
+    vim.keymap.set("n", "<leader>E", function()
+      require("fzf-lua").diagnostics_document({
+        severity_only = vim.diagnostic.severity.ERROR,
+      })
+    end, { desc = "Document errors (fzf)" })
+    vim.keymap.set("n", "<leader>W", function()
+      require("fzf-lua").diagnostics_document({
+        severity_only = vim.diagnostic.severity.WARN,
+      })
+    end, { desc = "Document warnigs (fzf)" })
     vim.keymap.set("n", "<leader>D", ":FzfLua diagnostics_workspace <CR>", { desc = "Workspace diagnostics (fzf)" })
     vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename all references of a class variable etc" })
     vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename all references of a class variable etc" })

@@ -63,8 +63,6 @@ return {
           icon = "",
         } },
         lualine_b = {
-        },
-        lualine_c = {
           { "filename", path = 1, color = { fg = "#888888" } },
           {
             "diagnostics",
@@ -76,6 +74,8 @@ return {
               hint  = "󰌵 ",
             },
           },
+        },
+        lualine_c = {
         },
         lualine_x = {
         },

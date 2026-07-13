@@ -41,7 +41,7 @@ if transparent == "true" then
 else
   vim.cmd("TransparentDisable")
 end
-
+vim.api.nvim_set_hl(0, "Whitespace", { fg = "#1c1c1c" })
 
 fix_floats()
 

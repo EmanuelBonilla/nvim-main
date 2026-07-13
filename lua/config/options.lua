@@ -14,3 +14,7 @@ vim.o.winblend = 0
 vim.o.pumblend = 0
 vim.opt.shortmess:append("c")
 vim.opt.cmdheight = 0
+vim.opt.list = true
+vim.opt.listchars:append({
+  space = "·",
+})

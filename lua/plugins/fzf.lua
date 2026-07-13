@@ -108,10 +108,10 @@ return {
 
     local function show_confirm(cwd, query, fpath, frel, ftype)
       prompt_choice("Create " .. ftype .. ": " .. frel .. "?", {
-        { key = "y", label = "Confirm",        value = "confirm",   color = "FzfFileGreen" },
-        { key = "f", label = "Other filename", value = "filename",  color = "FzfFileYellow" },
-        { key = "p", label = "Other filepath", value = "filepath",  color = "FzfFileYellow" },
-        { key = "n", label = "Cancel",         value = "cancel",    color = "FzfFileRed" },
+        { key = "y", label = "Confirm",        value = "confirm",  color = "FzfFileGreen" },
+        { key = "f", label = "Other filename", value = "filename", color = "FzfFileYellow" },
+        { key = "p", label = "Other filepath", value = "filepath", color = "FzfFileYellow" },
+        { key = "n", label = "Cancel",         value = "cancel",   color = "FzfFileRed" },
       }, function(choice)
         if not choice or choice == "cancel" then
           print("Cancelled")
@@ -145,7 +145,12 @@ return {
         prompt = "> ",
         header = false,
         actions = {
-          ["ctrl-f"] = function(selected, opts)
+          ["enter"] = function(selected, opts)
+            if selected and #selected > 0 then
+              require("fzf-lua").actions.file_edit(selected, opts)
+              return
+            end
+
             local query = opts.query
             if not query or #query == 0 then
               print("No query to create file")

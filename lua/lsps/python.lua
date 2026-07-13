@@ -26,9 +26,31 @@ vim.lsp.config["basedpyright"] = {
           reportUnknownParameterType = "warning",
           reportUnknownMemberType = "warning",
           reportUnknownLambdaType = "warning",
+          reportUnknownArgumentType = "warning",
+          reportPrivateUsage = "warning",
         },
       },
     },
   },
 }
-vim.lsp.enable("basedpyright")
+
+vim.lsp.config["pyrefly"] = {
+  cmd = { "pyrefly", "lsp" },
+  filetypes = { "python" },
+  root_markers = { "pyproject.toml", "pyrefly.toml", "setup.py", ".git", "manage.py" },
+  -- NOTE PYREFLY REQUIRES CONFIGURATION.TOML IN THE PROJECT ROOT, OTHERWISE IT WILL NOT WORKS
+  -- HOW PROGRAMER WISHES
+  settings = {
+    python = {
+      pyrefly = {
+        typeCheckingMode = "strict",
+        displayTypeErrors = "force-on",
+        preset = "strict",
+        analysis = {
+          diagnosticsMode = "workspace",
+        }
+      },
+    },
+  },
+}
+vim.lsp.enable("pyrefly")

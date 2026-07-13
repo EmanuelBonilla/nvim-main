@@ -11,21 +11,25 @@ return {
       },
       sections = {
         lualine_a = { { "mode", icon = "" } },
-        lualine_b = {},
-        lualine_c = {
-          { "filename", path = 1 },
+        lualine_b = {
+          "branch",
           {
-            "diagnostics",
-            sources = { "nvim_diagnostic" },
-            symbols = {
-              error = " ",
-              warn  = " ",
-              info  = " ",
-              hint  = "󰌵 ",
-            },
+            "diff",
+            symbols = { added = " ", modified = " ", removed = " " },
           },
         },
+        lualine_c = {
+        },
         lualine_x = {
+          {
+            function()
+              return require("nvim-navic").get_location()
+            end,
+            cond = function()
+              return Navic_status == "active" and require("nvim-navic").is_available()
+            end,
+            color = { fg = "#cba6f7" },
+          },
           -- Discord Rich Presence status
           -- {
           --   function()
@@ -45,9 +49,6 @@ return {
           --   end,
           --   color = { fg = "#cba6f7" },
           -- },
-          "encoding",
-          "fileformat",
-          "filetype",
         },
         lualine_y = { "progress" },
         lualine_z = {
@@ -62,25 +63,27 @@ return {
           icon = "",
         } },
         lualine_b = {
-          "branch",
-          {
-            "diff",
-            symbols = { added = " ", modified = " ", removed = " " },
-          },
         },
         lualine_c = {
-        },
-        lualine_x = {
+          { "filename", path = 1, color = { fg = "#888888" } },
           {
-            function()
-              return require("nvim-navic").get_location()
-            end,
-            cond = function()
-              return Navic_status == "active" and require("nvim-navic").is_available()
-            end,
+            "diagnostics",
+            sources = { "nvim_diagnostic" },
+            symbols = {
+              error = " ",
+              warn  = " ",
+              info  = " ",
+              hint  = "󰌵 ",
+            },
           },
         },
-        lualine_y = {},
+        lualine_x = {
+        },
+        lualine_y = {
+          "encoding",
+          "fileformat",
+          "filetype",
+        },
         lualine_z = { {
           function()
             return os.date("%H:%M")

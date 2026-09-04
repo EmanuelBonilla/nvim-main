@@ -1,13 +1,21 @@
 -- require omnisharp-roslyn
 vim.lsp.config["omnisharp"] = {
-  cmd = { "OmniSharp" },
+  cmd = { "OmniSharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
   filetypes = { "cs", "vb" },
-  root_markers = { "*.sln", "*.csproj", ".git" },
+  root_markers = {
+    function(name, path)
+      return name:match("%.sln$") ~= nil or name:match("%.csproj$") ~= nil
+    end,
+    ".git",
+  },
   settings = {
-    omnisharp = {
-      enableRoslynAnalyzers = true,
-      organizeImportsOnFormat = true,
-      enableImportCompletion = true,
+    FormattingOptions = {
+      EnableEditorConfigSupport = true,
+      OrganizeImports = true,
+    },
+    RoslynExtensionsOptions = {
+      EnableAnalyzersSupport = true,
+      EnableImportCompletion = true,
     },
   },
 }

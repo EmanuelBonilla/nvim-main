@@ -6,6 +6,17 @@ return {
     "rcarriga/nvim-notify",
   },
   config = function()
+    local notify = require("notify")
+    notify.setup({
+      position = "bottom-right",
+      top_down = false,
+      stages = "fade",
+      timeout = 2000,
+      background_colour = "#000000",
+      render = "default",
+    })
+    vim.notify = notify
+
     require("noice").setup({
       lsp = {
         progress = { enabled = true },
@@ -13,20 +24,12 @@ return {
         signature = { enabled = true },
       },
       notify = {
-        enabled = true,
+        enabled = false,
       },
       messages = {
         enabled = true,
         view = "notify",
       },
-    })
-    local notify = require("notify")
-
-    notify.setup({
-      stages = "fade",
-      timeout = 2000,
-      background_colour = "#000000",
-      render = "default",
     })
   end,
 }

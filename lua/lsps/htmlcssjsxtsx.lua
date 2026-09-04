@@ -3,6 +3,13 @@ vim.lsp.config["html"] = {
   cmd = { "vscode-html-language-server", "--stdio" },
   filetypes = { "html" },
   root_markers = { "package.json", ".git" },
+  settings = {
+    html = {
+      suggest = { html5 = true },
+      autoClosingTags = true,
+      format = { enable = true },
+    },
+  },
 }
 vim.lsp.enable("html")
 
@@ -10,6 +17,20 @@ vim.lsp.config["cssls"] = {
   cmd = { "vscode-css-language-server", "--stdio" },
   filetypes = { "css", "scss", "less" },
   root_markers = { "package.json", ".git" },
+  settings = {
+    css = {
+      validate = true,
+      lint = { unknownAtRules = "ignore" },
+    },
+    scss = {
+      validate = true,
+      lint = { unknownAtRules = "ignore" },
+    },
+    less = {
+      validate = true,
+      lint = { unknownAtRules = "ignore" },
+    },
+  },
 }
 vim.lsp.enable("cssls")
 

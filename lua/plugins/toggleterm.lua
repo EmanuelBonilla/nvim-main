@@ -6,14 +6,14 @@ return {
     local toggleterm = require("toggleterm")
     toggleterm.setup{
       size = 20,
-      hide_numbers = true,
+      hide_numbers = false,
       shade_terminals = true,
       start_in_insert = true,
       direction = "float",
       float_opts = {
         border = "curved",
-        width = function() return math.floor(vim.o.columns * 0.8) end,
-        height = function() return math.floor(vim.o.lines * 0.8) end,
+        width = function() return math.floor(vim.o.columns * 0.95) end,
+        height = function() return math.floor(vim.o.lines * 0.9) end,
         winblend = 0,
       },
     }
